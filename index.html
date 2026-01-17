@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Ongole Foods 🍽️</title>
+
+<script>
+window.onload = function () {
+    alert("🍽️ Welcome to Ongole Foods 😊✨\nFresh & tasty food awaits you 💙");
+};
+
+// Calculate total price
+function calculateTotal() {
+    const prices = {
+        idly: 40,
+        gheeidly: 45,
+        plaindosa: 20,
+        masaladosa: 45,
+        oniondosa: 40,
+        karamdosa: 50,
+        gheedosa: 50,
+        eggdosa: 35,
+        doubleeggdosa: 50,
+        ricehalf: 30,
+        ricefull: 50,
+        bonda: 25,
+        vada: 10
+    };
+
+    let total = 0;
+    for (let id in prices) {
+        let qty = Number(document.getElementById(id).value || 0);
+        total += qty * prices[id];
+    }
+
+    document.getElementById("totalPrice").innerText = "₹" + total;
+    return total;
+}
+
+// WhatsApp Order Function (100% reliable)
+function orderNow() {
+    const items = {
+        idly: "Idly (4 pcs – ₹40)",
+        gheeidly: "Ghee Idly (3 pcs – ₹45)",
+        plaindosa: "Plain Dosa (₹20)",
+        masaladosa: "Masala Dosa (₹45)",
+        oniondosa: "Onion Dosa (₹40)",
+        karamdosa: "Karam Dosa (₹50)",
+        gheedosa: "Ghee Dosa (₹50)",
+        eggdosa: "Egg Dosa (₹35)",
+        doubleeggdosa: "Double Egg Dosa (₹50)",
+        ricehalf: "Rice Half (₹30)",
+        ricefull: "Rice Full (₹50)",
+        bonda: "Bonda (4 pcs – ₹25)",
+        vada: "Vada (₹10)"
+    };
+
+    let text = "Hello 👋 I want to order from Ongole Foods 🍽️\n\n";
+    let hasOrder = false;
+
+    for (let id in items) {
+        let qty = Number(document.getElementById(id).value || 0);
+        if (qty > 0) {
+            text += items[id] + " – Qty: " + qty + "\n";
+            hasOrder = true;
+        }
+    }
+
+    if (!hasOrder) {
+        alert("⚠️ Please select at least one item");
+        return;
+    }
+
+    let total = calculateTotal();
+    let payment = document.querySelector('input[name="payment"]:checked').value;
+
+    text += "\n💰 Total Amount: ₹" + total;
+    text += "\n💳 Payment Method: " + payment;
+
+    // Encode message properly
+    let encodedText = encodeURIComponent(text);
+
+    // 🔴 REPLACE WITH YOUR REAL WHATSAPP NUMBER (NO +, NO SPACES)
+    let phoneNumber = "918008998067";  // example only
+
+    // Reliable WhatsApp URL
+    let whatsappURL =
+        "https://api.whatsapp.com/send?phone=" +
+        phoneNumber +
+        "&text=" +
+        encodedText;
+
+    window.open(whatsappURL, "_blank");
+}
+</script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
+    margin: 0;
+}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: white;
+    padding: 40px;
+    text-align: center;
+}
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.item {
+    background: #fff3e0;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 10px;
+    width: 260px;
+    font-weight: bold;
+}
+input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-top: 6px;
+}
+.total-box {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+.order-btn {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #25D366;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.order-btn:hover {
+    background: #1ebe5d;
+}
+iframe {
+    width: 100%;
+    height: 350px;
+    border: 0;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+footer {
+    margin-top: 40px;
+    color: #777;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>🍽️ Ongole Foods</h1>
+<p>Fresh, tasty & hygienic South Indian food 😋</p>
+
+<h2>📋 Menu (Select Quantity)</h2>
+
+<div class="menu">
+<div class="item">🍚 Idly (4 pcs – ₹40)<br>Qty <input type="number" id="idly" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🧈 Ghee Idly (3 pcs – ₹45)<br>Qty <input type="number" id="gheeidly" min="0" value="0" oninput="calculateTotal()"></div>
+
+<div class="item">🥞 Plain Dosa (₹20)<br>Qty <input type="number" id="plaindosa" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🌶️ Masala Dosa (₹45)<br>Qty <input type="number" id="masaladosa" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🧅 Onion Dosa (₹40)<br>Qty <input type="number" id="oniondosa" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🔥 Karam Dosa (₹50)<br>Qty <input type="number" id="karamdosa" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🧈 Ghee Dosa (₹50)<br>Qty <input type="number" id="gheedosa" min="0" value="0" oninput="calculateTotal()"></div>
+
+<div class="item">🍳 Egg Dosa (₹35)<br>Qty <input type="number" id="eggdosa" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🍳🍳 Double Egg Dosa (₹50)<br>Qty <input type="number" id="doubleeggdosa" min="0" value="0" oninput="calculateTotal()"></div>
+
+<div class="item">🍛 Rice Half (₹30)<br>Qty <input type="number" id="ricehalf" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🍛 Rice Full (₹50)<br>Qty <input type="number" id="ricefull" min="0" value="0" oninput="calculateTotal()"></div>
+
+<div class="item">🥯 Bonda (4 pcs – ₹25)<br>Qty <input type="number" id="bonda" min="0" value="0" oninput="calculateTotal()"></div>
+<div class="item">🍩 Vada (₹10)<br>Qty <input type="number" id="vada" min="0" value="0" oninput="calculateTotal()"></div>
+</div>
+
+<div class="total-box">
+💰 Total Price: <span id="totalPrice">₹0</span>
+</div>
+
+<h2>💳 Payment Method</h2>
+<div>
+<input type="radio" name="payment" value="Google Pay" checked> Google Pay<br>
+<input type="radio" name="payment" value="PhonePe"> PhonePe<br>
+<input type="radio" name="payment" value="Paytm"> Paytm<br>
+<input type="radio" name="payment" value="Cash on Delivery"> Cash on Delivery
+</div>
+
+<button class="order-btn" onclick="orderNow()">📲 Order Now on WhatsApp</button>
+
+<h2>📍 Our Location</h2>
+<iframe
+src="https://www.google.com/maps?q=Devastanagallu,+Venkatesappa+Layout,+Varthur,+Bangalore+560087&output=embed"
+loading="lazy">
+</iframe>
+
+<footer>
+© 2026 Ongole Foods 🍽️ | Made with 💙
+</footer>
+</div>
+
+</body>
+</html>
